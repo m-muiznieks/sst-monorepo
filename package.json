@@ -1,15 +1,16 @@
 {
-  "name": "monorepo-template",
-  "version": "0.0.0",
+  "name": "digiworks",
+  "version": "0.0.1",
   "workspaces": [
     "packages/*"
   ],
   "scripts": {},
   "devDependencies": {
     "@tsconfig/node22": "^22",
-    "typescript": "^5"
+    "typescript": "^5.8.3"
   },
   "dependencies": {
-    "sst": "^3"
+    "hono": "^4.7.9",
+    "sst": "^3.14.25"
   }
 }

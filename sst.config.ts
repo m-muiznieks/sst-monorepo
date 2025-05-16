@@ -1,20 +1,23 @@
 /// <reference path="./.sst/platform/config.d.ts" />
-
 export default $config({
   app(input) {
     return {
-      name: "monorepo-template",
+      name: "digiworks",
       removal: input?.stage === "production" ? "retain" : "remove",
       protect: ["production"].includes(input?.stage),
-      home: "aws",
+      home: "cloudflare",
+      providers: { cloudflare: "6.2.0" },
     };
   },
   async run() {
-    const storage = await import("./infra/storage");
-    await import("./infra/api");
-
+    const test_worker = new sst.cloudflare.Worker("test-worker", {
+      handler: "packages/hono/index.ts", // Place this file in your project root
+      url: true,
+    });
+    //const storage = await import("./infra/storage");
+    //await import("./infra/api");
     return {
-      MyBucket: storage.bucket.name,
+      api: test_worker.url,
     };
   },
 });
